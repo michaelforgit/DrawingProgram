@@ -25,4 +25,11 @@ public class Label extends Item {
   public Point getStartingPoint() {
     return startingPoint;
   }
+  public Point getCenter() {
+    return startingPoint;
+  }
+  public void move(int x, int y) {
+    startingPoint.x += x;
+    startingPoint.y += y;
+  }
 }

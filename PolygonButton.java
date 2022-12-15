@@ -6,7 +6,6 @@ public class PolygonButton  extends JButton implements ActionListener {
   protected View view;
   private MouseHandler mouseHandler;
   private MMAdapter mouseMoveListener;
-  private LineCommand lineCommand;
   private UndoManager undoManager;
   private Polygon polygon;
   public PolygonButton(UndoManager undoManager, View jFrame, JPanel jPanel) {
@@ -34,7 +33,7 @@ public class PolygonButton  extends JButton implements ActionListener {
     public void mouseClicked(MouseEvent event) {
         System.out.println("MOUSE CLICKED");
         if (event.getButton() == MouseEvent.BUTTON3) { //Right click
-            undoManager.undo();
+            polygon.removeLast();
             pointCount = 0;
             polygon.addLine(new Line(firstPoint, lastPoint));
             lastPoint = View.mapPoint(event.getPoint());
@@ -56,9 +55,6 @@ public class PolygonButton  extends JButton implements ActionListener {
                 drawingPanel.repaint();  //Needed to show the line
             }
         }
-    }
-    public int getPointCount() {
-        return pointCount;
     }
     public Point getLastPoint() {
         return lastPoint;

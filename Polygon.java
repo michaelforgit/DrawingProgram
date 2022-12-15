@@ -31,5 +31,18 @@ public class Polygon extends Item{
     public void removeLast() {
         lines.remove(lines.size() - 1);
     }
-
+    public Point getCenter() {
+        int x = 0;
+        int y = 0;
+        for (Line line : lines) {
+            x += line.getCenter().x;
+            y += line.getCenter().y;
+        }
+        return new Point(x/lines.size(), y/lines.size());
+    }
+    public void move(int x, int y) {
+        for (Line line : lines) {
+            line.move(x, y);
+        }
+    }
 }
