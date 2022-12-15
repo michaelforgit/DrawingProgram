@@ -55,7 +55,6 @@ public class LineButton  extends JButton implements ActionListener {
           undoManager.undo();
         }
         mouseHandler.debounce = false;
-        System.out.println("Should be drawing a line.");
         lineCommand = new LineCommand(mouseHandler.getFirstPoint(), View.mapPoint(event.getPoint()));
         undoManager.beginCommand(lineCommand);
         drawingPanel.repaint();
