@@ -35,6 +35,7 @@ class View extends JFrame {
     private MouseListener currentMouseListener;
     private KeyListener currentKeyListener;
     private FocusListener currentFocusListener;
+    private MouseMotionListener currentMouseMotionListener;
     public DrawingPanel() {
       setLayout(null);
     }
@@ -66,6 +67,11 @@ class View extends JFrame {
       removeFocusListener(currentFocusListener);
       currentFocusListener =  newListener;
       super.addFocusListener(newListener);
+    }
+    public void addMouseMotionListener(MouseMotionListener newListener) {
+      removeMouseMotionListener(currentMouseMotionListener);
+      currentMouseMotionListener =  newListener;
+      super.addMouseMotionListener(newListener);
     }
   }
   public void setFileName(String fileName) {
