@@ -29,7 +29,14 @@ public class Label extends Item {
     return startingPoint;
   }
   public void move(int x, int y) {
-    startingPoint.x += x;
-    startingPoint.y += y;
+    startingPoint.x -= x;
+    startingPoint.y -= y;
+  }
+  public int distance() {
+    int distance = 0;
+    for (int i = 0; i < text.length(); i++) {
+      distance += 10;
+    }
+    return distance;
   }
 }

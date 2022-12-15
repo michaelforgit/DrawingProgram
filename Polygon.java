@@ -35,7 +35,6 @@ public class Polygon extends Item{
         int x = 0;
         int y = 0;
         for (Line line : lines) {
-            System.out.println("NUM");
             x += line.getCenter().x;
             y += line.getCenter().y;
         }

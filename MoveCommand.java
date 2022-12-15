@@ -30,12 +30,14 @@ public class MoveCommand extends Command {
     }
 
     public void move(int x, int y) {
-        x = this.x - x;
-        y = this.y - y;
-        System.out.println(">>>");
-        System.out.println(x + " " + y);
+        // x = this.x - x;
+        // y = this.y - y;
+        // System.out.println(">>>");
+        // System.out.println(x + " " + y);
 
-        item.move(x/10,y/10);
+        item.move(this.x-x,this.y-y);
+        this.y = y;
+        this.x = x;
     }
     // public void move() {
     //     item.move(x, y);

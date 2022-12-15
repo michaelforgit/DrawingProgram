@@ -31,7 +31,7 @@ public class PolygonButton  extends JButton implements ActionListener {
     private PolygonCommand polygonCommand;
     private boolean debounce = false;
     public void mouseClicked(MouseEvent event) {
-        System.out.println("MOUSE CLICKED");
+        // System.out.println("MOUSE CLICKED");
         if (event.getButton() == MouseEvent.BUTTON3) { //Right click
             polygon.removeLast();
             pointCount = 0;

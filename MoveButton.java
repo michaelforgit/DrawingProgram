@@ -23,8 +23,7 @@ public class MoveButton  extends JButton implements ActionListener {
   }
   public void actionPerformed(ActionEvent event) {
     view.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-    // drawingPanel.addMouseListener(mouseHandler);
-    // drawingPanel.addMouseMotionListener(mouseMoveListener);
+
 
     items = new Vector<Item>();
     boxes = new Vector<Canvas>();
@@ -36,7 +35,6 @@ public class MoveButton  extends JButton implements ActionListener {
         Canvas box = new Canvas();
         box.setSize(15, 15);
         box.setLocation(item.getCenter().x+item.distance()/2, item.getCenter().y-item.distance()/2);
-        System.out.println(item.distance());
         box.setBackground(Color.BLACK);
         box.addMouseListener(mouseHandler);
         box.addMouseMotionListener(mouseMoveListener);
@@ -46,10 +44,6 @@ public class MoveButton  extends JButton implements ActionListener {
   }
   private class MouseHandler extends MouseAdapter {
     private MoveCommand moveCommand;
-    private boolean moving = false;
-    public void mouseClicked(MouseEvent event) {
-        System.out.println("MOUSE CLICKED");
-    }
     public void mouseReleased(MouseEvent event) {
         if (moveCommand != null) {
             view.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -62,8 +56,6 @@ public class MoveButton  extends JButton implements ActionListener {
     }
     public void mousePressed(MouseEvent event) {
         if (event.getComponent().getClass() == Canvas.class) {
-            moving = true;
-            System.out.println(moving);
             Item item = items.get(boxes.indexOf(event.getComponent()));
             Canvas box = (Canvas) event.getComponent();
             int x = event.getXOnScreen();
@@ -77,9 +69,11 @@ public class MoveButton  extends JButton implements ActionListener {
   private class MMAdapter extends MouseMotionAdapter {
     public void mouseDragged(MouseEvent event) {
         if (event.getComponent().getClass() == Canvas.class) {
-            System.out.println(event.getXOnScreen() + " " + event.getYOnScreen());
-            mouseHandler.moveCommand.move(event.getXOnScreen(), event.getYOnScreen());
-            drawingPanel.repaint();
+          Item item = items.get(boxes.indexOf(event.getComponent()));
+          event.getComponent().setLocation(item.getCenter().x+item.distance()/2, item.getCenter().y-item.distance()/2);
+          // System.out.println(event.getXOnScreen() + " " + event.getYOnScreen());
+          mouseHandler.moveCommand.move(event.getXOnScreen(), event.getYOnScreen());
+          drawingPanel.repaint();
         }
     }
   }
