@@ -28,4 +28,8 @@ public class Polygon extends Item{
         }
     }
 
+    public void removeLast() {
+        lines.remove(lines.size() - 1);
+    }
+
 }

@@ -48,12 +48,9 @@ public class Model {
     view.refresh();
   }
   public void removeItem(Item item) {
-    printItems();
-    System.out.println("REMOVING...");
-    System.out.println(item);
     itemList.remove(item);
     view.refresh();
-    printItems();
+    // printItems();
   }
   public Enumeration getItems() {
     return itemList.elements();

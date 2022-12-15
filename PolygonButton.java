@@ -8,6 +8,7 @@ public class PolygonButton  extends JButton implements ActionListener {
   private MMAdapter mouseMoveListener;
   private LineCommand lineCommand;
   private UndoManager undoManager;
+  private Polygon polygon;
   public PolygonButton(UndoManager undoManager, View jFrame, JPanel jPanel) {
     super("Polygon");
     this.undoManager = undoManager;
@@ -26,14 +27,14 @@ public class PolygonButton  extends JButton implements ActionListener {
   }
   private class MouseHandler extends MouseAdapter {
     private int pointCount = 0;
-    private Point firstPoint;
     private Point lastPoint;
+    private Point firstPoint;
     private PolygonCommand polygonCommand;
-    private Polygon polygon;
-    // private boolean debounce = false;
+    private boolean debounce = false;
     public void mouseClicked(MouseEvent event) {
         System.out.println("MOUSE CLICKED");
         if (event.getButton() == MouseEvent.BUTTON3) { //Right click
+            undoManager.undo();
             pointCount = 0;
             polygon.addLine(new Line(firstPoint, lastPoint));
             lastPoint = View.mapPoint(event.getPoint());
@@ -41,7 +42,7 @@ public class PolygonButton  extends JButton implements ActionListener {
             view.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             undoManager.endCommand(polygonCommand);
         } else {
-            if (++pointCount == 1) {
+            if (++pointCount == 1) {  //Initial click
                 polygon = new Polygon();
                 lastPoint = View.mapPoint(event.getPoint());
                 firstPoint = lastPoint;
@@ -52,25 +53,28 @@ public class PolygonButton  extends JButton implements ActionListener {
             } else if (++pointCount >= 2) {
                 polygon.addLine(new Line(lastPoint, View.mapPoint(event.getPoint())));
                 lastPoint = View.mapPoint(event.getPoint());
-                drawingPanel.repaint();
+                drawingPanel.repaint();  //Needed to show the line
             }
         }
     }
-    public Point getFirstPoint() {
-      return firstPoint;
+    public int getPointCount() {
+        return pointCount;
+    }
+    public Point getLastPoint() {
+        return lastPoint;
     }
   }
   private class MMAdapter extends MouseMotionAdapter {
-    // public void mouseMoved(MouseEvent event) {
-    //   if (mouseHandler.pointCount == 1) {
-    //     if (mouseHandler.debounce == false) {
-    //       undoManager.undo();
-    //     }
-    //     mouseHandler.debounce = false;
-    //     lineCommand = new LineCommand(mouseHandler.getFirstPoint(), View.mapPoint(event.getPoint()));
-    //     undoManager.beginCommand(lineCommand);
-    //     drawingPanel.repaint();
-    //   }
-    // }
+    public void mouseMoved(MouseEvent event) {
+        if (mouseHandler.pointCount >= 1) {
+            Line line = new Line(mouseHandler.getLastPoint(), View.mapPoint(event.getPoint()));
+            if (mouseHandler.debounce == true) {
+                polygon.removeLast();
+            }
+            polygon.addLine(line);
+            drawingPanel.repaint();
+            mouseHandler.debounce = true;
+        }
+    }
   }
 }
