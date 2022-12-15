@@ -4,23 +4,15 @@ public class MoveCommand extends Command {
     private Item item;
     private int x;
     private int y;
-    private Canvas box;
-    private Point location;
     int index;
 
     public MoveCommand(Item item, int x, int y, Canvas box) {
         this.item = item;
         this.x = x;
         this.y = y;
-        this.box = box;
     }
 
     public void execute() {
-        // box.setLocation(location);
-        // Point origLocation = item.getCenter();
-        // int xOffset = (int)(location.getX() - origLocation.getX());
-        // int yOffset = (int)(location.getY() - origLocation.getY());
-        item.move(x, y);
 
     }
 
@@ -38,6 +30,14 @@ public class MoveCommand extends Command {
     }
 
     public void move(int x, int y) {
-        item.move(x, y);
+        x = this.x - x;
+        y = this.y - y;
+        System.out.println(">>>");
+        System.out.println(x + " " + y);
+
+        item.move(x/10,y/10);
     }
+    // public void move() {
+    //     item.move(x, y);
+    // }
 }

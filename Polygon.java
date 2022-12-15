@@ -35,6 +35,7 @@ public class Polygon extends Item{
         int x = 0;
         int y = 0;
         for (Line line : lines) {
+            System.out.println("NUM");
             x += line.getCenter().x;
             y += line.getCenter().y;
         }
@@ -44,5 +45,12 @@ public class Polygon extends Item{
         for (Line line : lines) {
             line.move(x, y);
         }
+    }
+    public int distance() {
+        int distance = 0;
+        for (Line line : lines) {
+            distance = Math.max(line.distance(), distance);
+        }
+        return distance;
     }
 }

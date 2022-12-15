@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.lang.Math;
 public class Line extends Item {
   private Point point1;
   private Point point2;
@@ -36,16 +37,33 @@ public class Line extends Item {
     return "Line  from " + point1 + " to " + point2;
   }
   public Point getCenter() {
-    System.out.println(toString());
-    System.out.println((getPoint1().x + getPoint2().x)/2);
-    System.out.println((getPoint1().y + getPoint2().y)/2);
     return new Point((getPoint1().x + getPoint2().x)/2, (getPoint1().y + getPoint2().y)/2);
   }
+  public int distance() {
+    return (int) distance(point1, point2);
+  }
+  // public void move(int x, int y) {
+  //   System.out.println("SHOULD BE MOVING HERE");
+  //   int xDif = Math.abs(point1.x - point2.x);
+  //   int yDif = Math.abs(point1.y - point2.y);
+  //   System.out.println("xDif: " + xDif + " yDif: " + yDif);
+  //   if (point1.y < point2.y) {
+  //     point1.y = y;
+  //     point2.y = y + yDif;
+  //   } else {
+  //     point1.y = y;
+  //     point2.y = y - yDif;
+  //   }
+  //   point1.x = x;
+  //   point2.x = x + xDif;
+  //   System.out.println(toString());
+  // }
   public void move(int x, int y) {
-    point1.y = y - point1.y;
-    point2.y = y - point2.y;
-    point1.x = x - point1.x;
-    point2.x = x - point2.x;
+    point1.x = point1.x - x;
+    point1.y = point1.y - y;
+    point2.x = point2.x - x;
+    point2.y = point2.y - y;
+    // System.out.println(toString());
   }
 }
 

@@ -45,7 +45,6 @@ public class PolygonButton  extends JButton implements ActionListener {
                 polygon = new Polygon();
                 lastPoint = View.mapPoint(event.getPoint());
                 firstPoint = lastPoint;
-                polygon.addLine(new Line(lastPoint, View.mapPoint(event.getPoint())));
                 polygonCommand = new PolygonCommand(polygon);
                 undoManager.beginCommand(polygonCommand);
                 lastPoint = View.mapPoint(event.getPoint());

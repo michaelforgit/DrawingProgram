@@ -118,7 +118,7 @@ class View extends JFrame {
     buttonPanel.add(redoButton);
     buttonPanel.add(polygonButton);
     buttonPanel.add(moveButton);
-    this.setSize(800, 500);
+    this.setSize(1280, 700);
   }
   public void refresh() {
     // code to access the Model update the contents of the drawing panel.
