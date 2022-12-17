@@ -40,6 +40,7 @@ public class PolygonButton  extends JButton implements ActionListener {
             drawingPanel.removeMouseListener(this);
             view.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
             undoManager.endCommand(polygonCommand);
+            debounce = false;
         } else {
             if (++pointCount == 1) {  //Initial click
                 polygon = new Polygon();

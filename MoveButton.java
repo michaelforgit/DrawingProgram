@@ -47,8 +47,8 @@ public class MoveButton  extends JButton implements ActionListener {
     public void mouseReleased(MouseEvent event) {
         if (moveCommand != null) {
             view.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-            undoManager.beginCommand(moveCommand);
-            mouseHandler.moveCommand.move(event.getXOnScreen(), event.getYOnScreen());
+            // undoManager.beginCommand(moveCommand);
+            moveCommand.move(event.getXOnScreen(), event.getYOnScreen());
             undoManager.endCommand(moveCommand);
             boxes.clear();
             drawingPanel.removeAll();
@@ -57,11 +57,11 @@ public class MoveButton  extends JButton implements ActionListener {
     public void mousePressed(MouseEvent event) {
         if (event.getComponent().getClass() == Canvas.class) {
             Item item = items.get(boxes.indexOf(event.getComponent()));
-            Canvas box = (Canvas) event.getComponent();
             int x = event.getXOnScreen();
             int y = event.getYOnScreen();
             
-            moveCommand = new MoveCommand(item, x, y, box);
+            moveCommand = new MoveCommand(item, x, y);
+            undoManager.beginCommand(moveCommand);
         }
     }
 

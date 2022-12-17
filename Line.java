@@ -42,22 +42,7 @@ public class Line extends Item {
   public int distance() {
     return (int) distance(point1, point2);
   }
-  // public void move(int x, int y) {
-  //   System.out.println("SHOULD BE MOVING HERE");
-  //   int xDif = Math.abs(point1.x - point2.x);
-  //   int yDif = Math.abs(point1.y - point2.y);
-  //   System.out.println("xDif: " + xDif + " yDif: " + yDif);
-  //   if (point1.y < point2.y) {
-  //     point1.y = y;
-  //     point2.y = y + yDif;
-  //   } else {
-  //     point1.y = y;
-  //     point2.y = y - yDif;
-  //   }
-  //   point1.x = x;
-  //   point2.x = x + xDif;
-  //   System.out.println(toString());
-  // }
+
   public void move(int x, int y) {
     point1.x = point1.x - x;
     point1.y = point1.y - y;
